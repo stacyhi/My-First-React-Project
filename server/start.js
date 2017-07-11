@@ -24,7 +24,7 @@ module.exports = app
 
   .use('/api', require('./api')) // Serve our api
 
-  .get('/*', (_, res) => res.sendFile(resolve(__dirname, '..', 'public', 'outline.html')))
+  .get('/*', (_, res) => res.sendFile(resolve(__dirname, '..', 'public', 'index.html')))
 
   //error handling
   app.use(function (err, req, res, next) {

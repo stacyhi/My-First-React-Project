@@ -5,13 +5,15 @@ const Campus = require('../../db/models/campuses');
 module.exports = router;
 
 router.get('/', function (req, res, next) {
-	Campus.findAll()
+	Campus.findAll({
+		order: [['name', 'ASC']]
+	})
 		.then(campuses => res.json(campuses))
 		.catch(next);
 });
 
 router.get('/:id', function (req, res, next) {
-	Campus.findById(req.params.id)
+	Campus.findStudentsByCampusId(req.params.id)
 		.then(campus => res.json(campus))
 		.catch(next);
 });
@@ -46,9 +48,9 @@ router.put('/', function (req, res, next) {
 });
 
 router.delete('/:id', function (req, res, next) {
-  Campus.destroy({
+	Campus.destroy({
 		where: { id: req.params.id }
 	})
-    .then(() => res.status(204).end())
-    .catch(next);
+		.then(() => res.status(204).end())
+		.catch(next);
 });

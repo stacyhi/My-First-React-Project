@@ -1,17 +1,21 @@
 'use strict';
-var Sequelize = require('sequelize')
-var db = require('../index.js')
+const Sequelize = require('sequelize');
+const db = require('../index');
 
-
-module.exports = db.define('campus', {
+const Campus = db.define('campus', {
   name: {
     type: Sequelize.STRING,
-    allowNull: false
+    validate: {
+      notEmpty: true
+    }
   },
-  image:{
-    type: Sequelize.STRING
+  image: {
+    type: Sequelize.STRING,
+    defaultValue: 'defaultCampus.jpg'
   },
   dean: {
     type: Sequelize.STRING
-  }
+  },
 })
+
+module.exports = Campus;

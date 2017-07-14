@@ -1,0 +1,93 @@
+body {
+  font-family: 'Open Sans', sans-serif;
+  background: black;
+  min-width: -webkit-min-content;
+  background: url(../images/background2.jpg) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+.App {
+  text-align: center;
+  color: #fff;
+}
+
+.navbar-title {
+  color: #fff;
+  float: left;
+  padding-top: 28px;
+  font-size: 20px;
+}
+.navbar-logo {
+  margin: 16px;
+  height: 40px;
+  padding: 0px;
+}
+
+.btn-xlarge {
+    padding: 18px 28px;
+    font-size: 22px;
+    line-height: normal;
+    -webkit-border-radius: 8px;
+       -moz-border-radius: 8px;
+            border-radius: 8px;
+}
+
+.btn-circle {
+  height: 20px;
+  width: 20px;
+  border-radius: 50%;
+  text-align: center;
+  padding: 6px 0;
+  font-size: 12px;
+  line-height: 42%; }
+
+.large-margin {
+  margin: 48px;
+}
+.top-margin {
+  margin-top: 24px;
+}
+.xlarge-margin-top {
+  margin-top: 72px;
+}
+.left-margin{
+  margin-left: 12px;
+}
+.img-medium{
+  height: 230px;
+}
+.thumbnail, .img-thumbnail {
+  color: #fff;
+  background: #23527c;
+  border-color: #23527c;
+}
+.thumbnail:hover {
+  text-decoration: underline;
+  text-decoration-color: #fff;
+  background-color: #337ab7;
+}
+.link {
+  text-decoration: underline;
+  text-decoration-color: #fff;
+  color: #fff;
+}
+.link:hover {
+  color: #5bc0de;
+  text-decoration-color: #5bc0de;
+}
+h1,h2,h3,h4,h5 {
+  color: #fff;
+}
+.left{
+  text-align: left;
+}
+form label {
+    margin: 12px;
+}
+.black {
+  color: #000;
+}
+/* light blue #0275d8*/

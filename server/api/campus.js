@@ -5,13 +5,18 @@ const Campus = require('../../db/models/campuses');
 module.exports = router;
 
 router.get('/', function (req, res, next) {
-	Campus.findAll()
+	Campus.findAll({
+		order: [['name', 'ASC']]
+	})
 		.then(campuses => res.json(campuses))
 		.catch(next);
 });
 
 router.get('/:id', function (req, res, next) {
-	Campus.findById(req.params.id)
+	Campus.findOne({
+		where: { id: +req.params.id },
+		include: [{ model: Student }]
+	})
 		.then(campus => res.json(campus))
 		.catch(next);
 });
@@ -30,15 +35,16 @@ router.post('/', function (req, res, next) {
 		.catch(next);
 });
 
-router.put('/', function (req, res, next) {
+router.put('/:id', function (req, res, next) {
 	Campus.update({
 		name: req.body.name,
 		dean: req.body.dean,
 		image: req.body.image
 	}, {
 			where: {
-				name: req.body.name,
-			}
+				id: req.params.id,
+			},
+			returning: true
 		}
 	)
 		.then(campus => res.json(campus))
@@ -46,9 +52,9 @@ router.put('/', function (req, res, next) {
 });
 
 router.delete('/:id', function (req, res, next) {
-  Campus.destroy({
+	Campus.destroy({
 		where: { id: req.params.id }
 	})
-    .then(() => res.status(204).end())
-    .catch(next);
+		.then(() => res.status(204).end())
+		.catch(next);
 });

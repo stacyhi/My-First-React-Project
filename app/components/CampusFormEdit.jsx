@@ -45,7 +45,7 @@ class CampusFormEdit extends Component {
             <label htmlFor="campus">Campus:</label>
             <input
               name="campus"
-              placeholder="Edit name"
+              placeholder="Edit Name"
               className="form-control"
               value={this.state.name}
               onChange={this.handleNameChange}
@@ -65,7 +65,7 @@ class CampusFormEdit extends Component {
             <label htmlFor="image">Image:</label>
             <input
               name="image"
-              placeholder="Edit image"
+              placeholder="Edit Image"
               className="form-control"
               value={this.state.image}
               onChange={this.handleImageChange}

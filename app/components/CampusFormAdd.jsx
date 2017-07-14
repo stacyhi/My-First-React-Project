@@ -8,15 +8,18 @@ const defaultState = {
   newImage: 'defaultCampus.jpg'
 }
 
-class CampusForm extends Component {
-  constructor(props) {
-    super(props);
+class CampusFormAdd extends Component {
+  constructor() {
+    super();
     this.state = { defaultState };
 
     this.handleNameChange = this.handleNameChange.bind(this);
     this.handleDeanChange = this.handleDeanChange.bind(this);
     this.handleImageChange = this.handleImageChange.bind(this);
     this.handlePost = this.handlePost.bind(this);
+  }
+  componentDidMount() {
+    this.setState(defaultState);
   }
 
   handleNameChange(event) {
@@ -46,7 +49,7 @@ class CampusForm extends Component {
             <label htmlFor="name">Campus:</label>
             <input
               name="name"
-              placeholder="Enter new name"
+              placeholder="Enter New Name"
               className="form-control"
               value={this.state.newCampusName}
               onChange={this.handleNameChange}
@@ -56,7 +59,7 @@ class CampusForm extends Component {
             <label htmlFor="dean">Dean:</label>
             <input
               name="dean"
-              placeholder="Enter new Dean"
+              placeholder="Enter New Dean"
               className="form-control"
               value={this.state.newDean}
               onChange={this.handleDeanChange}
@@ -66,7 +69,7 @@ class CampusForm extends Component {
             <label htmlFor="image">Image:</label>
             <input
               name="image"
-              placeholder="Enter new image"
+              placeholder="Enter New Image"
               className="form-control"
               value={this.state.newImage}
               onChange={this.handleImageChange}
@@ -88,4 +91,4 @@ const mapDispatchToProps = dispatch => ({
   postNewCampus: (name, dean, image) => dispatch(campusPost(name, dean, image)),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(CampusForm);
+export default connect(mapStateToProps, mapDispatchToProps)(CampusFormAdd);

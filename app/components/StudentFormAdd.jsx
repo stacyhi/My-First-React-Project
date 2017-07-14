@@ -66,7 +66,7 @@ class StudentFormAdd extends Component {
             <label htmlFor="name">Name:</label>
             <input
               name="name"
-              placeholder="Enter new name"
+              placeholder="Enter New Name"
               className="form-control"
               value={this.state.newName}
               onChange={this.handleNameChange}
@@ -76,7 +76,7 @@ class StudentFormAdd extends Component {
             <label htmlFor="email">Email:</label>
             <input
               name="email"
-              placeholder="Enter new Email"
+              placeholder="Enter New Email"
               className="form-control"
               value={this.state.newEmail}
               onChange={this.handleEmailChange}

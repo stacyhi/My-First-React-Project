@@ -14,7 +14,6 @@ const campusWriteAll = allCampus => {
 }
 
 const campusWriteOne = oneCampus => {
-  console.log('CAMPUS_WRITE_ONE', oneCampus)
   return {
     type: CAMPUS_WRITE_ONE,
     data: oneCampus

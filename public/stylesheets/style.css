@@ -50,13 +50,16 @@ body {
 .top-margin {
   margin-top: 24px;
 }
+.xlarge-margin-top {
+  margin-top: 72px;
+}
 .left-margin{
   margin-left: 12px;
 }
 .img-medium{
   height: 230px;
 }
-.thumbnail {
+.thumbnail, .img-thumbnail {
   color: #fff;
   background: #23527c;
   border-color: #23527c;
@@ -66,7 +69,16 @@ body {
   text-decoration-color: #fff;
   background-color: #337ab7;
 }
-h4,h5 {
+.link {
+  text-decoration: underline;
+  text-decoration-color: #fff;
+  color: #fff;
+}
+.link:hover {
+  color: #5bc0de;
+  text-decoration-color: #5bc0de;
+}
+h1,h2,h3,h4,h5 {
   color: #fff;
 }
 .left{
@@ -74,5 +86,8 @@ h4,h5 {
 }
 form label {
     margin: 12px;
+}
+.black {
+  color: #000;
 }
 /* light blue #0275d8*/

@@ -17,6 +17,9 @@ export default function Navbar(){
         </div>
         <div className="collapse navbar-collapse" id="myNavbar">
         <ul className="nav navbar-nav navbar-right">
+          <li><Link to="/"><span>HOME</span></Link></li>
+          <li><Link to="/student"><span>Students</span></Link></li>
+          <li><Link to="/campus"><span>Campuses</span></Link></li>
           <li>About</li>
           <li className="dropdown">
             <a className="dropdown-toggle" data-toggle="dropdown" href="#">About
@@ -25,7 +28,6 @@ export default function Navbar(){
               <li><a href="#">Created by Stacy Hirschberg</a></li>
             </ul>
           </li>
-          <li><Link to="/"><span> Home</span></Link></li>
         </ul>
         </div>
       </div>

@@ -13,7 +13,10 @@ router.get('/', function (req, res, next) {
 });
 
 router.get('/:id', function (req, res, next) {
-	Campus.findStudentsByCampusId(req.params.id)
+	Campus.findOne({
+		where: { id: +req.params.id },
+		include: [{ model: Student }]
+	})
 		.then(campus => res.json(campus))
 		.catch(next);
 });
@@ -32,15 +35,16 @@ router.post('/', function (req, res, next) {
 		.catch(next);
 });
 
-router.put('/', function (req, res, next) {
+router.put('/:id', function (req, res, next) {
 	Campus.update({
 		name: req.body.name,
 		dean: req.body.dean,
 		image: req.body.image
 	}, {
 			where: {
-				name: req.body.name,
-			}
+				id: req.params.id,
+			},
+			returning: true
 		}
 	)
 		.then(campus => res.json(campus))

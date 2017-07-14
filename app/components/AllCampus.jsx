@@ -1,56 +1,62 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import axios from 'axios';
-import CampusForm from './CampusForm';
+import { connect } from 'react-redux';
+import { campusGetAll, campusShowForm } from '../actions/campusActions';
+import CampusFormAdd from './CampusFormAdd';
 
-export default class AllCampus extends Component {
-  constructor() {
-    super();
+class AllCampus extends Component {
+  constructor(props) {
+    super(props);
     this.state = {
-      campus: [],
-      showCampusForm: false
+      showForm: false
     }
-    this.showCampusForm = this.showCampusForm.bind(this);
+    this.showForm = this.showForm.bind(this);
   }
 
   componentDidMount() {
-    axios.get('/api/campus')
-      .then(res => res.data)
-      .then(
-      campus => {
-        console.log('campus', campus)
-        this.setState({ campus })
-      });
+    this.props.getAllCampuses();
   }
-  showCampusForm(){
-    this.setState({ showCampusForm: true });
+
+  showForm() {
+    this.setState({ showForm: true })
   }
 
   render() {
     return (
       <div className="container">
-      <h1>Locations
-        <Link to="/campus" type="button" className="btn btn-default btn-sm left-margin">
-          <span className="glyphicon glyphicon-plus" onClick={this.showCampusForm} />
-        </Link>
-      </h1>
-      { this.state.showCampusForm ? <CampusForm /> : null }
+        <h1>Campuses
+          <span type="button" className="btn btn-primary btn-sm left-margin">
+            <span className="glyphicon glyphicon-plus" onClick={this.showForm} />
+          </span>
+        </h1>
+        {this.state.showForm && <CampusFormAdd />}
         <div className="row">
-          {this.state.campus.map(campus => {
+          {this.props.campus.allCampus.map(campus => {
             return (
-            <div key={campus.id} className="col-xs-12 col-md-6 nopadding">
-              <Link className="thumbnail" to={`/campus/${campus.id}`}>
-                <img className="img-responsive" style={{height:'410px'}} src={`/images/${campus.image}`} />
+              <div key={campus.id} className="col-xs-12 col-md-4 nopadding">
+                <Link className="thumbnail" to={`/campus/${campus.id}`}>
+                  <img className="img-responsive" style={{ height: '260px' }} src={`/images/${campus.image}`} />
                   <div className="caption">
-                  <h4>{campus.name}</h4>
-                  <h5>Dean: {campus.dean}</h5>
-                </div>
-              </Link>
-            </div>)
+                    <h4>{campus.name}</h4>
+                    <h5>Dean: {campus.dean}</h5>
+                  </div>
+                </Link>
+              </div>)
           })}
         </div>
       </div>
     )
   }
 }
+
+const mapStateToProps = storeState => ({
+  campus: storeState.campus
+});
+
+const mapDispatchToProps = dispatch => ({
+  getAllCampuses: () => dispatch(campusGetAll()),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(AllCampus);
+
 

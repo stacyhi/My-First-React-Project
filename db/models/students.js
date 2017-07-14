@@ -1,12 +1,14 @@
 'use strict';
-var Sequelize = require('sequelize')
-var db = require('../index.js')
+const Sequelize = require('sequelize');
+const db = require('../index.js');
 
-
-module.exports = db.define('student', {
+const Student = db.define('student', {
   name: {
     type: Sequelize.STRING,
-    allowNull: false
+    allowNull: false,
+    validate: {
+      notEmpty: true
+    }
   },
   email: {
     type: Sequelize.STRING,
@@ -14,4 +16,11 @@ module.exports = db.define('student', {
       isEmail: true
     }
   }
+}, {
+  defaultScope: {
+    include: { model: db.models.campus }
+  }
+
 })
+
+module.exports = Student;

@@ -56,6 +56,12 @@ body {
 .left-margin{
   margin-left: 12px;
 }
+.xlarge-left-margin{
+  margin-left: 72px;
+}
+.bottom-margin{
+  margin-bottom: 24px;
+}
 .img-medium{
   height: 230px;
 }
@@ -89,5 +95,24 @@ form label {
 }
 .black {
   color: #000;
+}
+.hidden{
+  display: none;
+}
+.threeColumns {
+  -webkit-column-count: 3; /* Chrome, Safari, Opera */
+  -moz-column-count: 3; /* Firefox */
+  column-count: 3;
+  columns: 3;
+  column-fill: balance;
+  -webkit-column-fill: balance;
+  overflow: auto;
+}
+.noBreak {
+    margin: 0;
+    -webkit-column-break-inside: avoid; /* Chrome, Safari */
+    page-break-inside: avoid;           /* Theoretically FF 20+ */
+    break-inside: avoid-column;         /* IE 11 */
+    display:table;                      /* Actually FF 20+ */
 }
 /* light blue #0275d8*/

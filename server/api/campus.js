@@ -15,7 +15,7 @@ router.get('/', function (req, res, next) {
 router.get('/:id', function (req, res, next) {
 	Campus.findOne({
 		where: { id: +req.params.id },
-		include: [{ model: Student }]
+		include: [{ model: Student, order: [['name', 'ASC']] }],
 	})
 		.then(campus => res.json(campus))
 		.catch(next);

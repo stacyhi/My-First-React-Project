@@ -38,17 +38,37 @@ export const studentGetOne = (studentId) => dispatch => {
     })
 };
 
-export const studentPost = (name, email, campusId) => dispatch => {
-  const postData = {
-    name, email, campusId
+// export const studentPost = (name, email, campusId, history) => dispatch => {
+//   const postData = {
+//     name, email, campusId
+//   }
+//   axios.post('/api/student', postData)
+//     .then(res => res.data)
+//     .then(response => {
+//       const id = response[0].id;
+//       //this.context.history.push(`/student/${id}`);
+//       dispatch(studentGetOne(id));
+//     })
+//     .catch(err => console.log('Error:', err));
+// };
+
+
+export function studentPost (name, email, campusId, history) {
+  console.log('history',history);
+  return function (dispatch) {
+    const postData = {
+      name, email, campusId
+    }
+    axios.post('/api/student', postData)
+      .then(res => res.data)
+      .then(response => {
+        const id = response[0].id;
+        history.push(`/student/${id}`);
+        dispatch(studentGetOne(id));
+      })
+      .catch(err => console.log('Error:', err));
   }
-  axios.post('/api/student', postData)
-    .then(res => res.data)
-    .then(response => {
-      dispatch(studentGetOne(response[0].id))
-    })
-    .catch(err => console.log('Error:', err));
-};
+}
 
 export const studentPut = (id, name, email, campusId) => dispatch => {
   const postData = {
@@ -67,7 +87,7 @@ export const studentDelete = (id, history) => dispatch => {
   const postData = {id}
   axios.delete(`/api/student/${id}`, postData)
     .then(() => {
-      history.push('/student')
+      history.goBack();
       dispatch({ type: STUDENT_DELETE });
     })
     .catch(err => console.log('Error:', err));

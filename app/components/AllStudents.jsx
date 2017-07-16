@@ -5,10 +5,11 @@ import { studentGetAll } from '../actions/studentActions';
 import StudentFormAdd from './StudentFormAdd';
 
 class AllStudents extends Component {
-  constructor(props) {
-    super(props);
+  constructor() {
+    super();
     this.state = {
-      showForm: false
+      showForm: 'hidden',
+      formIcon: 'plus'
     }
     this.showAddForm = this.showAddForm.bind(this);
   }
@@ -18,35 +19,40 @@ class AllStudents extends Component {
   }
 
   showAddForm() {
-    this.setState({ showForm: true })
+    const toggleForm = this.state.showForm || 'hidden';
+    const formState = toggleForm === 'hidden' ? 'show' : 'hidden';
+    const formIcon = toggleForm === 'hidden' ? 'minus' : 'plus';
+    this.setState({ showForm: formState, formIcon })
   }
 
   render() {
+    const showForm = this.state.showForm || 'hidden';
+    const formIcon = this.state.formIcon || 'plus';
     return (
       <div className="container">
         <h1>Students
           <span type="button" className="btn btn-primary btn-sm left-margin">
-            <span className="glyphicon glyphicon-plus" onClick={this.showAddForm} />
+            <span className={`glyphicon glyphicon-${formIcon}`} onClick={this.showAddForm} />
           </span>
         </h1>
-        {this.state.showForm && <StudentFormAdd />}
-        <div className="row">
-          {this.props.student.allStudent.map(student => {
-            const campusId = student.campus ? student.campus.id : '';
-            const campusName = student.campus ? student.campus.name : '';
-            return (
-              <div key={student.id} className="col-xs-12 col-md-4 nopadding">
-                <div className="caption">
-                  <Link to={`/student/${student.id}`}>
-                    <h4 className="left link">{student.name}</h4>
-                  </Link>
-                  <Link to={`/campus/${campusId}`}>
-                    <h5 className="left link">Campus: {campusName}</h5>
-                  </Link>
-                </div>
-              </div>
-            )
-          })}
+        <div className={showForm}>
+          {<StudentFormAdd />}
+        </div>
+        <div className="threeColumns xlarge-left-margin">
+        {this.props.student.allStudent.map(student => {
+          const campusId = student.campus ? student.campus.id : '';
+          const campusName = student.campus ? student.campus.name : '';
+          return (
+            <div key={student.id} className="caption bottom-margin noBreak">
+              <Link to={`/student/${student.id}`}>
+                <h4 className="left link">{student.name}</h4>
+              </Link>
+              <Link to={`/campus/${campusId}`}>
+                <h5 className="left link">Campus: {campusName}</h5>
+              </Link>
+            </div>
+          )
+        })}
         </div>
       </div>
     )

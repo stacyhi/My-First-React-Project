@@ -14,6 +14,15 @@ const campusWriteAll = allCampus => {
 }
 
 const campusWriteOne = oneCampus => {
+  const sortedStudents = oneCampus.students;
+  // sequelize won't sort my students
+  // they're in an include
+  sortedStudents.sort((a, b) => {
+   if (a.name < b.name) return -1;
+   if (a.name > b.name) return 1
+   return 0;
+  })
+  oneCampus.students = sortedStudents;
   return {
     type: CAMPUS_WRITE_ONE,
     data: oneCampus
@@ -34,23 +43,26 @@ export const campusGetOne = (campusId) => dispatch => {
   axios.get(`/api/campus/${campusId}`)
     .then(res => res.data)
     .then(response => {
-      console.log('campusGetOne', response )
       dispatch(campusWriteOne(response))
     })
     .catch(err => console.log('Error:', err));
 };
 
-export const campusPost = (name, dean, image) => dispatch => {
-  const postData ={
-    name, dean, image
+export function campusPost (name, dean, image, history) {
+  return  dispatch => {
+    const postData = {
+      name, dean, image
+    }
+    axios.post('/api/campus', postData)
+      .then(res => res.data)
+      .then(response => {
+        const id = response[0].id;
+        history.push(`/campus/${id}`);
+        dispatch(campusGetOne(id))
+      })
+      .catch(err => console.log('Error:', err));
   }
-  axios.post('/api/campus', postData)
-    .then(res => res.data)
-    .then(response => {
-      dispatch(campusGetOne(response[0].id))
-    })
-    .catch(err => console.log('Error:', err));
-};
+}
 
 export const campusPut = (id, name, dean, image) => dispatch => {
   const postData = {
@@ -68,7 +80,7 @@ export const campusDelete = (id, history) => dispatch => {
   const postData = {id}
   axios.delete(`/api/campus/${id}`, postData)
     .then(() => {
-      history.push('/campus')
+      history.push('/campus');
       dispatch({ type: CAMPUS_DELETE });
     })
     .catch(err => console.log('Error:', err));

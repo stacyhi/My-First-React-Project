@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import {campusPost} from '../actions/campusActions';
+import { withRouter } from 'react-router-dom'
 
 const defaultState = {
   newCampusName: '',
@@ -33,7 +34,7 @@ class CampusFormAdd extends Component {
   }
   handlePost(event) {
     event.preventDefault();
-    this.props.postNewCampus(this.state.newCampusName, this.state.newDean, this.state.newImage);
+    this.props.postNewCampus(this.state.newCampusName, this.state.newDean, this.state.newImage, this.props.history);
     this.setState(defaultState);
   }
 
@@ -78,7 +79,7 @@ class CampusFormAdd extends Component {
           <span className="left-margin"><button className="btn btn-success" type="submit">Add Campus</button></span>
         </form>
         <br />
-      </div >
+      </div>
     )
   }
 }
@@ -88,7 +89,8 @@ const mapStateToProps = storeState => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  postNewCampus: (name, dean, image) => dispatch(campusPost(name, dean, image)),
+  postNewCampus: (name, dean, image, history) => dispatch(campusPost(name, dean, image, history)),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(CampusFormAdd);
+const routerCampusFormAdd = withRouter(CampusFormAdd);
+export default connect(mapStateToProps, mapDispatchToProps)(routerCampusFormAdd);

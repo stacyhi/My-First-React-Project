@@ -1,14 +1,15 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { campusGetAll, campusShowForm } from '../actions/campusActions';
+import { campusGetAll } from '../actions/campusActions';
 import CampusFormAdd from './CampusFormAdd';
 
 class AllCampus extends Component {
-  constructor(props) {
-    super(props);
+  constructor() {
+    super();
     this.state = {
-      showForm: false
+      showForm: 'hidden',
+      fromIcon: 'plus'
     }
     this.showForm = this.showForm.bind(this);
   }
@@ -18,18 +19,26 @@ class AllCampus extends Component {
   }
 
   showForm() {
-    this.setState({ showForm: true })
+    console.log('form');
+    const toggleForm = this.state.showForm || 'hidden';
+    const formState = toggleForm === 'hidden' ? 'show' : 'hidden';
+    const formIcon = toggleForm === 'hidden' ? 'minus' : 'plus';
+    this.setState({ showForm: formState, formIcon })
   }
 
   render() {
+    const showForm = this.state.showForm || 'hidden';
+    const formIcon = this.state.formIcon || 'plus';
     return (
       <div className="container">
         <h1>Campuses
           <span type="button" className="btn btn-primary btn-sm left-margin">
-            <span className="glyphicon glyphicon-plus" onClick={this.showForm} />
+            <span className={`glyphicon glyphicon-${formIcon}`} onClick={this.showForm} />
           </span>
         </h1>
-        {this.state.showForm && <CampusFormAdd />}
+        <div className={showForm}>
+          {<CampusFormAdd />}
+        </div>
         <div className="row">
           {this.props.campus.allCampus.map(campus => {
             return (

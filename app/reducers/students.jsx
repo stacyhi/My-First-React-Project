@@ -8,8 +8,8 @@ const initialState = {
   },
 }
 
-const studentReducer = (state = initialState, action) => {
-  const newState = Object.assign({}, state);
+const studentReducer = (storeState = initialState, action) => {
+  const newState = Object.assign({}, storeState);
   switch (action.type) {
     case STUDENT_WRITE_ALL:
       newState.allStudent = action.data;
@@ -25,7 +25,7 @@ const studentReducer = (state = initialState, action) => {
       };
       return newState;
     default:
-      return state
+      return storeState
   }
 };
 

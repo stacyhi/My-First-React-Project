@@ -6,8 +6,8 @@ const initialState = {
   oneCampus: {},
 }
 
-const campusReducer = (state = initialState, action) => {
-  const newState = Object.assign({}, state);
+const campusReducer = (storeState = initialState, action) => {
+  const newState = Object.assign({}, storeState);
   switch (action.type) {
     case CAMPUS_WRITE_ALL:
       newState.allCampus = action.data;
@@ -19,7 +19,7 @@ const campusReducer = (state = initialState, action) => {
     case CAMPUS_DELETE:
       newState.oneCampus = {};
       return newState;
-    default: return state
+    default: return storeState
   }
 };
 

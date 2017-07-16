@@ -24,10 +24,11 @@ class OneCampus extends Component {
 
   handleDeleteClick() {
     const campusId = this.props.campus.oneCampus.id
-    this.props.deleteCampus(campusId,this.props.history);
+    this.props.deleteCampus(campusId, this.props.history);
   }
 
   componentDidMount() {
+    console.log("OneCampus didmouont", this.props)
     const campusId = this.props.match.params.campusId;
     this.props.getOneCampus(campusId);
   }
@@ -54,10 +55,10 @@ class OneCampus extends Component {
             {this.state.showForm && <CampusFormEdit /> }
           </div>
         </div>
-        <div className="row">
-          { this.props.campus.oneCampus.students &&this.props.campus.oneCampus.students.map(student => {
+        <div className="threeColumns xlarge-left-margin">
+          { this.props.campus.oneCampus.students && this.props.campus.oneCampus.students.map(student => {
             return (
-              <div key={student.id} className="col-xs-12 col-md-4 nopadding">
+              <div key={student.id} className="bottom-margin noBreak">
                 <div className="caption">
                   <Link to={`/student/${student.id}`}>
                     <h4 className="link left">{student.name}</h4>

@@ -1,14 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom'
 
 import { campusGetAll } from '../actions/campusActions';
 import { studentPost } from '../actions/studentActions';
-
-// const inputLength = 5;
-// const tooLong = 24;
-// const tooShort = 0; // < 1 && dirty
-// const dirty = false; //add to state
-// //handle change dirty = true
 
 class StudentFormAdd extends Component {
   constructor() {
@@ -16,16 +11,16 @@ class StudentFormAdd extends Component {
     this.state = {
       newName: '',
       newEmail: '',
-      newCampus: 'n/a'
+      newCampus: '1'
     };
-
-    this.handleNameChange = this.handleNameChange.bind(this);
+   this.handleNameChange = this.handleNameChange.bind(this);
     this.handleEmailChange = this.handleEmailChange.bind(this);
     this.handleCampusChange = this.handleCampusChange.bind(this);
     this.handlePost = this.handlePost.bind(this);
   }
 
   componentDidMount() {
+    console.log('didMount', this.props);
     this.props.getAllCampuses();
   }
 
@@ -43,11 +38,11 @@ class StudentFormAdd extends Component {
 
   handlePost(event) {
     event.preventDefault();
-    this.props.postNewStudent(this.state.newName, this.state.newEmail, this.state.newCampus);
+    this.props.postNewStudent(this.state.newName, this.state.newEmail, this.state.newCampus, this.props.history);
     this.setState({
       newName: '',
       newEmail: '',
-      newCampus: 'n/a',
+      newCampus: '1',
     });
   }
 
@@ -66,7 +61,7 @@ class StudentFormAdd extends Component {
             <label htmlFor="name">Name:</label>
             <input
               name="name"
-              placeholder="Enter new name"
+              placeholder="Enter New Name"
               className="form-control"
               value={this.state.newName}
               onChange={this.handleNameChange}
@@ -76,7 +71,7 @@ class StudentFormAdd extends Component {
             <label htmlFor="email">Email:</label>
             <input
               name="email"
-              placeholder="Enter new Email"
+              placeholder="Enter New Email"
               className="form-control"
               value={this.state.newEmail}
               onChange={this.handleEmailChange}
@@ -94,9 +89,8 @@ class StudentFormAdd extends Component {
           </div>
           <span className="left-margin"><button className="btn btn-success" type="submit">Add Student</button></span>
         </form>
-        {/*<div className="alert alert-warning">This is a warning</div>*/}
         <br />
-      </div >
+      </div>
     )
   }
 }
@@ -108,7 +102,8 @@ const mapStateToProps = storeState => ({
 
 const mapDispatchToProps = dispatch => ({
   getAllCampuses: () => dispatch(campusGetAll()),
-  postNewStudent: (name, dean, image) => dispatch(studentPost(name, dean, image)),
+  postNewStudent: (name, email, campus, history) => dispatch(studentPost(name, email, campus, history)),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(StudentFormAdd);
+const routerStudentFormAdd = withRouter(StudentFormAdd)
+export default connect(mapStateToProps, mapDispatchToProps)(routerStudentFormAdd);

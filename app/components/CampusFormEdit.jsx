@@ -5,7 +5,6 @@ import {campusPut} from '../actions/campusActions';
 class CampusFormEdit extends Component {
   constructor(props) {
     super(props);
-    console.log('props',this.props)
     this.state = {
       name: this.props.campus.oneCampus.name,
       dean: this.props.campus.oneCampus.dean,
@@ -45,7 +44,7 @@ class CampusFormEdit extends Component {
             <label htmlFor="campus">Campus:</label>
             <input
               name="campus"
-              placeholder="Edit name"
+              placeholder="Edit Name"
               className="form-control"
               value={this.state.name}
               onChange={this.handleNameChange}
@@ -65,13 +64,13 @@ class CampusFormEdit extends Component {
             <label htmlFor="image">Image:</label>
             <input
               name="image"
-              placeholder="Edit image"
+              placeholder="Edit Image"
               className="form-control"
               value={this.state.image}
               onChange={this.handleImageChange}
             />
           </div>
-          <span className="left-margin"><button className="btn btn-success" type="submit">Edit Location</button></span>
+          <span className="left-margin"><button className="btn btn-success" type="submit">Edit Campus</button></span>
         </form>
         <br />
       </div >

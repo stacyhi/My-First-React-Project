@@ -21,8 +21,6 @@ class StudentFormEdit extends Component {
 
   componentDidMount() {
     this.props.getAllCampuses();
-    console.dir("MATCH", this.props.history)
-    console.log('props', this.props)
     this.setState({
       name: this.props.student.oneStudent.name,
       email: this.props.student.oneStudent.email,
@@ -60,7 +58,7 @@ class StudentFormEdit extends Component {
             <label htmlFor="name">Name:</label>
             <input
               name="name"
-              placeholder="Edit name"
+              placeholder="Edit Name"
               className="form-control"
               value={this.state.name}
               onChange={this.handleNameChange}
@@ -70,7 +68,7 @@ class StudentFormEdit extends Component {
             <label htmlFor="email">Email:</label>
             <input
               name="email"
-              placeholder="Edit email"
+              placeholder="Edit Email"
               className="form-control"
               value={this.state.email}
               onChange={this.handleEmailChange}
@@ -89,7 +87,6 @@ class StudentFormEdit extends Component {
           </div>
           <span className="left-margin"><button className="btn btn-success" type="submit">Edit Student</button></span>
         </form>
-        {/*<div className="alert alert-warning">This is a warning</div>*/}
         <br />
       </div >
     )

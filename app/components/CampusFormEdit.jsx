@@ -11,21 +11,14 @@ class CampusFormEdit extends Component {
       image: this.props.campus.oneCampus.image
     };
 
-    this.handleNameChange = this.handleNameChange.bind(this);
-    this.handleDeanChange = this.handleDeanChange.bind(this);
-    this.handleImageChange = this.handleImageChange.bind(this);
+    this.handleChange = this.handleChange.bind(this);
     this.handlePost = this.handlePost.bind(this);
   }
 
-  handleNameChange(event) {
-    this.setState({ name: event.target.value });
+  handleChange(event) {
+    this.setState({ [event.target.name]: event.target.value })
   }
-  handleDeanChange(event) {
-    this.setState({ dean: event.target.value });
-  }
-  handleImageChange(event) {
-    this.setState({ image: event.target.value });
-  }
+
   handlePost(event) {
     event.preventDefault();
     const id = this.props.campus.oneCampus.id;
@@ -43,11 +36,11 @@ class CampusFormEdit extends Component {
           <div className="form-group left">
             <label htmlFor="campus">Campus:</label>
             <input
-              name="campus"
+              name="name"
               placeholder="Edit Name"
               className="form-control"
               value={this.state.name}
-              onChange={this.handleNameChange}
+              onChange={this.handleChange}
             />
           </div>
           <div className="form-group left">
@@ -57,7 +50,7 @@ class CampusFormEdit extends Component {
               placeholder="Edit Dean"
               className="form-control"
               value={this.state.dean}
-              onChange={this.handleDeanChange}
+              onChange={this.handleChange}
             />
           </div>
           <div className="form-group left">
@@ -67,7 +60,7 @@ class CampusFormEdit extends Component {
               placeholder="Edit Image"
               className="form-control"
               value={this.state.image}
-              onChange={this.handleImageChange}
+              onChange={this.handleChange}
             />
           </div>
           <span className="left-margin"><button className="btn btn-success" type="submit">Edit Campus</button></span>

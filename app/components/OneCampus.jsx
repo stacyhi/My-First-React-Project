@@ -6,8 +6,6 @@ import { Link } from 'react-router-dom';
 import { campusGetOne, campusDelete } from '../actions/campusActions';
 import CampusFormEdit from './CampusFormEdit';
 
-
-
 class OneCampus extends Component {
   constructor() {
     super();
@@ -28,7 +26,6 @@ class OneCampus extends Component {
   }
 
   componentDidMount() {
-    console.log("OneCampus didmouont", this.props)
     const campusId = this.props.match.params.campusId;
     this.props.getOneCampus(campusId);
   }

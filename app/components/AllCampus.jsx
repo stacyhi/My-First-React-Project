@@ -19,7 +19,6 @@ class AllCampus extends Component {
   }
 
   showForm() {
-    console.log('form');
     const toggleForm = this.state.showForm || 'hidden';
     const formState = toggleForm === 'hidden' ? 'show' : 'hidden';
     const formIcon = toggleForm === 'hidden' ? 'minus' : 'plus';

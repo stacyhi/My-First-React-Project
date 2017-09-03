@@ -12,26 +12,15 @@ const defaultState = {
 class CampusFormAdd extends Component {
   constructor() {
     super();
-    this.state = { defaultState };
-
-    this.handleNameChange = this.handleNameChange.bind(this);
-    this.handleDeanChange = this.handleDeanChange.bind(this);
-    this.handleImageChange = this.handleImageChange.bind(this);
+    this.state = defaultState;
+    this.handleChange = this.handleChange.bind(this);
     this.handlePost = this.handlePost.bind(this);
   }
-  componentDidMount() {
-    this.setState(defaultState);
+
+  handleChange(event) {
+    this.setState({ [event.target.name]: event.target.value })
   }
 
-  handleNameChange(event) {
-    this.setState({ newCampusName: event.target.value });
-  }
-  handleDeanChange(event) {
-    this.setState({ newDean: event.target.value });
-  }
-  handleImageChange(event) {
-    this.setState({ newImage: event.target.value });
-  }
   handlePost(event) {
     event.preventDefault();
     this.props.postNewCampus(this.state.newCampusName, this.state.newDean, this.state.newImage, this.props.history);
@@ -49,31 +38,32 @@ class CampusFormAdd extends Component {
           <div className="form-group left">
             <label htmlFor="name">Campus:</label>
             <input
-              name="name"
+              type="text"
+              name="newCampusName"
               placeholder="Enter New Name"
               className="form-control"
               value={this.state.newCampusName}
-              onChange={this.handleNameChange}
+              onChange={this.handleChange}
             />
           </div>
           <div className="form-group left">
             <label htmlFor="dean">Dean:</label>
             <input
-              name="dean"
+              name="newDean"
               placeholder="Enter New Dean"
               className="form-control"
               value={this.state.newDean}
-              onChange={this.handleDeanChange}
+              onChange={this.handleChange}
             />
           </div>
             <div className="form-group left">
             <label htmlFor="image">Image:</label>
             <input
-              name="image"
+              name="newImage"
               placeholder="Enter New Image"
               className="form-control"
               value={this.state.newImage}
-              onChange={this.handleImageChange}
+              onChange={this.handleChange}
             />
           </div>
           <span className="left-margin"><button className="btn btn-success" type="submit">Add Campus</button></span>

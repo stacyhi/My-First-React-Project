@@ -13,27 +13,17 @@ class StudentFormAdd extends Component {
       newEmail: '',
       newCampus: '1'
     };
-   this.handleNameChange = this.handleNameChange.bind(this);
-    this.handleEmailChange = this.handleEmailChange.bind(this);
-    this.handleCampusChange = this.handleCampusChange.bind(this);
+
+    this.handleChange = this.handleChange.bind(this);
     this.handlePost = this.handlePost.bind(this);
   }
 
   componentDidMount() {
-    console.log('didMount', this.props);
     this.props.getAllCampuses();
   }
 
-  handleNameChange(event) {
-    this.setState({ newName: event.target.value });
-  }
-
-  handleEmailChange(event) {
-    this.setState({ newEmail: event.target.value });
-  }
-
-  handleCampusChange(event) {
-    this.setState({ newCampus: event.target.value });
+  handleChange(event) {
+    this.setState({ [event.target.name]: event.target.value })
   }
 
   handlePost(event) {
@@ -60,28 +50,29 @@ class StudentFormAdd extends Component {
           <div className="form-group left">
             <label htmlFor="name">Name:</label>
             <input
-              name="name"
+              name="newName"
               placeholder="Enter New Name"
               className="form-control"
               value={this.state.newName}
-              onChange={this.handleNameChange}
+              onChange={this.handleChange}
             />
           </div>
           <div className="form-group left">
             <label htmlFor="email">Email:</label>
             <input
-              name="email"
+              name="newEmail"
               placeholder="Enter New Email"
               className="form-control"
               value={this.state.newEmail}
-              onChange={this.handleEmailChange}
+              onChange={this.handleChange}
             />
           </div>
           <div className="form-group left">
             <label>Campus:</label>
             <select
+              name="newCampus"
               className="black"
-              onChange={this.handleCampusChange}
+              onChange={this.handleChange}
             >
               {campusMenu}
               ))}

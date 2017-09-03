@@ -13,30 +13,18 @@ class StudentFormEdit extends Component {
       campusId: this.props.student.oneStudent.campusId
     };
 
-    this.handleNameChange = this.handleNameChange.bind(this);
-    this.handleEmailChange = this.handleEmailChange.bind(this);
-    this.handleCampusChange = this.handleCampusChange.bind(this);
+    this.handleChange = this.handleChange.bind(this);
     this.handlePost = this.handlePost.bind(this);
   }
 
   componentDidMount() {
     this.props.getAllCampuses();
-    this.setState({
-      name: this.props.student.oneStudent.name,
-      email: this.props.student.oneStudent.email,
-      campusId: this.props.student.oneStudent.campusId
-    })
   }
 
-  handleNameChange(event) {
-    this.setState({ name: event.target.value });
+  handleChange(event) {
+    this.setState({ [event.target.name]: event.target.value })
   }
-  handleEmailChange(event) {
-    this.setState({ email: event.target.value });
-  }
-  handleCampusChange(event) {
-    this.setState({ campusId: event.target.value });
-  }
+
   handlePost(event) {
     event.preventDefault();
     const id = this.props.student.oneStudent.id;
@@ -61,7 +49,7 @@ class StudentFormEdit extends Component {
               placeholder="Edit Name"
               className="form-control"
               value={this.state.name}
-              onChange={this.handleNameChange}
+              onChange={this.handleChange}
             />
           </div>
           <div className="form-group left">
@@ -71,15 +59,16 @@ class StudentFormEdit extends Component {
               placeholder="Edit Email"
               className="form-control"
               value={this.state.email}
-              onChange={this.handleEmailChange}
+              onChange={this.handleChange}
             />
           </div>
           <div className="form-group left">
             <label>Campus:</label>
             <select
+              name="campusId"
               className="black"
               value={this.state.campusId}
-              onChange={this.handleCampusChange}
+              onChange={this.handleChange}
             >
               {campusMenu}
               ))}
